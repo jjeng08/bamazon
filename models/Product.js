@@ -1,5 +1,5 @@
 module.exports = function(connection, Sequelize) {
-	var Product = connection.define('Product', {
+	const Product = connection.define('Product', {
 	 productName: {
 		type: Sequelize.STRING,
 		allowNull: false,
@@ -27,7 +27,7 @@ module.exports = function(connection, Sequelize) {
 		validate: {
 		  notEmpty: true
 		}
-	  }
+		}
 	});
   
 	return Product;
