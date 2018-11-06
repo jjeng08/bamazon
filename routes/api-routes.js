@@ -10,6 +10,18 @@ app.get('/api/products', function(req, res) {
     });
   });
 
+app.get('/api/products/:id', function(req, res) {
+  db.Product.findALL({
+    where:{
+      id:req.params.id
+    }
+  }).then(function(data) {
+    res.json(data);
+  }).catch(function(err) {
+    res.json(err);
+  })
+});
+
   app.post('/api/products', function(req, res) {
     db.Product.create(req.body).then(function(rows) {
       res.json({ success: true });
