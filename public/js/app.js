@@ -104,7 +104,7 @@ $(function () {
 		for (let i = 0; i < dataList.length; i++) {
 			const basic = basicBuild(dataList[i]);
 			const cartItems = cartBuild(dataList[i]);
-			$('#cartItems').append(`<div class="productBox"> ${basic}${cartItems}</div>`);
+			$('#cartItems').append(`<div class="cartBox"> ${basic}${cartItems}</div>`);
 		}
 	}
 

@@ -11,12 +11,19 @@ html, body{
 	width:100%;
 }
 
+#top {
+	display:flex;
+	position:fixed;
+	flex-direction:column;
+	width:100%;
+	z-index: 2;
+}
+
 #titleBand {
 	display:flex;
-	justify-content: space-between;
 	align-items:center;
+	justify-content: space-between;
 	width:100%;
-	position:fixed;
 	height:50px;
 	background: white;
 	border-bottom-width:3px;
@@ -27,31 +34,61 @@ html, body{
 #logo{
 	font-size:40px;
 	font-family:"bam";
-	margin-left:10%;
+	margin-left:7.5%;
+}
+
+#tagline{
+	font-size:24px;
+	font-family:"bam";
 }
 
 #submitOrders{
 	font-family:"Bam";
 	font-size:16px;
 	height:20px;
-	margin-right:5%;
+	margin-right:5%
+}
+
+#topBarBox {
+	display:flex;
+	position:fixed;
+	width:100%;
+	border-bottom-width:3px;
+	justify-content: center;
+	border-style:solid;
+	border-color: black;
+	padding-top:60px;
+	background-color:white;
+}
+
+#topBar{
+	display:flex;
+	width:700px;
+	margin-bottom:5px;
 }
 
 #itemContainer{
 	display:flex;
+	flex-direction:column;
 	width:100%;
-	justify-content: center;
+	align-items: center;
+	padding-top:100px;
 }
 
 #itemList{
 	display:flex;
 	flex-direction:column;
 	align-items:center;
-	padding-top:80px;
-	width:90%;
-	max-width:800px;
+	width:700px;
 }
 
+#buy {
+	font-family:"Bam";
+	font-size:20px;
+	width:50px;
+	margin-left:25px;
+	text-align:center;
+}
 .addCartButton {
 	font-family:"bam";
 	width:50px;
@@ -71,7 +108,6 @@ html, body{
 	margin-left:15px;
 }
 
-
 .productBox{
 	display: flex;
 	width:100%;
@@ -86,17 +122,32 @@ html, body{
 	width:700px;
 }
 
+#product, #source{
+	width:100px;
+	margin-left:25px;
+	text-align:center;
+	font-family:"Bam";
+	font-size:20px;
+}
+
 .nameBox, .depBox{
 	width:100px;
 	margin-left:25px;
 	text-align:center;
 } 
 
-.priceBox, .stockBox {
+#price, #stock, #order{
 	width:75px;
 	margin-left:25px;
 	text-align:center;
+	font-family:"Bam";
+	font-size:20px;
+}
 
+.priceBox, .stockBox{
+	width:75px;
+	margin-left:25px;
+	text-align:center;
 }
 
 .numberPick{
