@@ -1,20 +1,107 @@
+/*LOGO ON TOP*/
+@font-face {
+	font-family:"Bam";
+	src: url('../css/BADABB__.TTF')
+}
+
+html, body{
+	padding:0;
+	margin:0;
+	height:100%;
+	width:100%;
+}
+
+#titleBand {
+	display:flex;
+	justify-content: space-between;
+	align-items:center;
+	width:100%;
+	position:fixed;
+	height:50px;
+	background: white;
+	border-bottom-width:3px;
+	border-style:solid;
+	border-color: black;
+}
+
+#logo{
+	font-size:40px;
+	font-family:"bam";
+	margin-left:10%;
+}
+
+#submitOrders{
+	font-family:"Bam";
+	font-size:16px;
+	height:20px;
+	margin-right:5%;
+}
+
+#itemContainer{
+	display:flex;
+	width:100%;
+	justify-content: center;
+}
+
+#itemList{
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	padding-top:80px;
+	width:90%;
+	max-width:800px;
+}
+
+.addCartButton {
+	font-family:"bam";
+	width:50px;
+	margin-left:25px;
+}
+
+.notifier {
+	font-family:"bam";
+	padding:5px;
+	color:red;
+	background-color:yellow;
+	border-style:solid;
+	border-width:2px;
+	border-color:red;
+	border-radius:15px;
+	font-size:16px;
+	margin-left:15px;
+}
+
+
 .productBox{
+	display: flex;
+	width:100%;
+	padding-bottom:10px;
+	padding-top:10px;
+	margin-bottom:30px;
+	align-items:center;
 	border-style:solid;
 	border-width:2px;
 	border-color: black;
 	border-radius: 10px;
-	display: flex;
-	justify-content: space-between;
-	height:40px;
-	margin-top: 20px;
-	margin-left: 20px;
-	margin-right:20px;
-	align-items:center;
+	width:700px;
 }
 
-.nameBox, .depBox, .priceBox, .stockBox {
+.nameBox, .depBox{
 	width:100px;
+	margin-left:25px;
 	text-align:center;
+} 
+
+.priceBox, .stockBox {
+	width:75px;
+	margin-left:25px;
+	text-align:center;
+
+}
+
+.numberPick{
+	width:75px;
+	margin-left:25px;
 }
 
 .notifier{
@@ -22,7 +109,9 @@
 }
 
 .variant{
-	color:blue;
+	color:yellow;
+	background-color:red;
+	border-color:yellow;
 }
 
 /*MODAL CONTENT*/
