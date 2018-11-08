@@ -17,6 +17,14 @@
 	text-align:center;
 }
 
+.notifier{
+	display:none;
+}
+
+.variant{
+	color:blue;
+}
+
 /*MODAL CONTENT*/
 .modal {
 	display: none; /* Hidden by default */
@@ -31,8 +39,10 @@
 	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 	overflow:scroll;
 }
+.show{
+	display:block;
+}
 
-/* Modal Content */
 #modalContent {
 	display:flex;
 	flex-direction:column;

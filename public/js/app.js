@@ -5,8 +5,7 @@ $(function () {
 		const depo = data.departmentName;
 		const price = data.price;
 		const stock = data.stock;
-
-		const divItems = 
+		const divItems =
 			`<div class="nameBox" id="${id}name">${name}</div>
 			<div class="depBox" id="${id}depo">${depo}</div>
 			<div class="priceBox" id="${id}price">$${price}</div>
@@ -15,24 +14,24 @@ $(function () {
 		return divItems;
 	}
 
-	function orderBuild(data){
+	function orderBuild(data) {
 		const id = data.id;
 		const stock = data.stock;
-
-		const orderInputs = 
-			`<input type="number" min="0" max ="${stock}" name="${id}"/>
+		const orderInputs =
+			`<input type="number" min="0" max ="${stock}" class="numberPick" id="${id}input"/>
+			<div class="notifier" id="${id}updated">Cart Updated</div>
 			<button class="addCartButton" id="${id}">Add to Cart</button>`;
 
 		return orderInputs;
-		}
+	}
 
-	function cartBuild(data){
+	function cartBuild(data) {
 		const id = data.id;
 		const price = data.price;
 		const count = data.count;
-
-		const cartInput = 
-		`<div class="totalBox" id="${id}total">$${count*price}</div>`;
+		const cartInput =
+			`<div class="totalBox" id="${id}total">$${count * price}</div>
+			<button class="removeFromCart" id="${id}">Remove</button>`;
 
 		return cartInput;
 	}
@@ -42,10 +41,8 @@ $(function () {
 
 		for (let i = 0; i < dataList.length; i++) {
 			const itemBox = basicBuild(dataList[i])
-
 			const orderInputs = orderBuild(dataList[i])
 			$(`#${locationID}`).append(`<div class="productBox">${itemBox}${orderInputs}</div>`)
-
 		};
 	}
 
@@ -53,12 +50,12 @@ $(function () {
 		$.get('/api/products')
 			.then(function (data) {
 				renderPage(data, locationID);
-			})
+			});
 	}
 
 	getProduct("results");
 
-	const allOrders = [];
+	let allOrders = [];
 
 	$("#results").on("click", ".addCartButton", addToCart);
 	function addToCart(event) {
@@ -66,7 +63,7 @@ $(function () {
 
 		const orderID = $(this).attr('id');
 		const priceString = $(`#${orderID}price`).text();
-		const count = parseInt($(`input[name=${orderID}]`).val());
+		const count = parseInt($(`#${orderID}input`).val());
 
 		const singleOrder = {
 			id: orderID,
@@ -80,42 +77,68 @@ $(function () {
 		const testArray = [];
 		for (let i = 0; i < allOrders.length; i++) {
 			testArray.push(allOrders[i].id)
-		} if (isNaN(singleOrder.count)) {
+		}
+
+		if (isNaN(singleOrder.count)) {
 			console.log("isNaN");
-		} else if (testArray.includes(singleOrder.id) && singleOrder.count === 0) {
-			const index = testArray.indexOf(singleOrder.id);
-			allOrders.splice(index, 1);
-		} else if(testArray.includes(singleOrder.id)) {
-			const index = testArray.indexOf(singleOrder.id);
-			allOrders.splice(index, 1, singleOrder);
+		} else if (testArray.includes(orderID) && singleOrder.count === 0) {
+			allOrders.splice(testArray.indexOf(orderID), 1);
+			$(`#${orderID}updated`).toggleClass("variant");
+		} else if (testArray.includes(orderID)) {
+			allOrders.splice(testArray.indexOf(orderID), 1, singleOrder);
+			$(`#${orderID}updated`).toggleClass("variant");
 		} else {
 			allOrders.push(singleOrder);
+			$(`#${orderID}updated`).addClass("show");
 		}
 		console.log(allOrders);
 		return allOrders;
 	}
+
+	function renderCart(dataList) {
+		$('#purchase').empty();
+
+		for (let i = 0; i < dataList.length; i++) {
+			const basic = basicBuild(dataList[i]);
+			const cartItems = cartBuild(dataList[i]);
+
+			$('#purchase').append(`<div class="productBox"> ${basic}${cartItems}</div>`);
+		}
+	}
+
+	$("#purchase").on("click", ".removeFromCart", removeFromCart);
+	function removeFromCart(event) {
+		event.preventDefault();
+
+		const orderID = $(this).attr('id');
+		console.log(orderID);
+		for (let i = 0; i < allOrders.length; i++) {
+			if (allOrders[i].id === orderID) {
+				allOrders.splice(i, 1);
+				renderCart(allOrders);
+			}
+		}
+
+	}
+
 	$('#submitOrders').on("click", enterOrders)
 	function enterOrders(event) {
 		event.preventDefault();
 
-		for (let i=0; i<allOrders.length; i++) {
-			const basic = basicBuild(allOrders[i]);
-			const cartItems = cartBuild(allOrders[i]);
+		renderCart(allOrders);
+		$('#myModal').addClass("show");
+	}
 
-			$('#purchase').append(`<div class="productBox"> ${basic}${cartItems}</div>`);
-		}
+	$('#cancel').on("click", emptyCart);
+	function emptyCart(event) {
+		event.preventDefault();
 
-		const modal = document.getElementById('myModal');
-		var span = document.getElementsByClassName("close")[0];
-		modal.style.display = "block";
-		span.onclick = function () {
-			modal.style.display = "none";
-		}
-		window.onclick = function (event) {
-			if (event.target == modal) {
-				modal.style.display = "none";
-			}
-		}
+		$('.numberPick').val('');
+		$('.notifier').removeClass("show");
+			
+		allOrders = [];
+		console.log(allOrders);
+		$('#myModal').removeClass("show");
 	}
 });
 
