@@ -42,7 +42,7 @@ $(function () {
 		const orderInputs =
 			`<div class="stockBox" id="${id}stock">${stock}</div>
 			<input type="number" min="0" max ="${stock}" class="numberPick" id="${id}input"/>
-			<button class="addCartButton" id="${id}">Buy!</button>
+			<button class="addCartButton" id="${id}">Check!</button>
 			<div class="notifier" id="${id}updated">Bam!</div>`;
 		return orderInputs;
 	}
@@ -92,7 +92,7 @@ $(function () {
 		const count = data.count;
 		const total = count * price;
 		const cartInput =
-			`<div class="countBox" id="${id}stock">${count}</div>
+			`<div class="countBox" id="${id}count">${count}</div>
 		<div class="totalBox" id="${id}total">$ ${total}</div>
 		<button class="removeFromCart" id="${id}">Remove</button>`;
 		return cartInput;
@@ -100,18 +100,26 @@ $(function () {
 
 	function renderCart(dataList) {
 		$('#cartItems').empty();
+		$('#totalLine').empty();
+
+		let sum =0;
 
 		for (let i = 0; i < dataList.length; i++) {
 			const basic = basicBuild(dataList[i]);
 			const cartItems = cartBuild(dataList[i]);
-			$('#cartItems').append(`<div class="cartBox"> ${basic}${cartItems}</div>`);
+			sum += dataList[i].price * dataList[i].count;
+			$('#cartItems').append(`<div class="cartBox">${basic}${cartItems}</div>`)
 		}
+		console.log(sum);
+		$('#totalLine').append(`
+			<div id="totalLabel">Total:</div>
+			<div id="grandTotal">$${sum}<div>`
+			)
 	}
 
 	$("#cartItems").on("click", ".removeFromCart", removeFromCart);
 	function removeFromCart(event) {
 		event.preventDefault();
-
 		const orderID = $(this).attr('id');
 		for (let i = 0; i < allOrders.length; i++) {
 			if (allOrders[i].id === orderID) {
@@ -125,8 +133,13 @@ $(function () {
 	function enterOrders(event) {
 		event.preventDefault();
 
-		renderCart(allOrders);
-		$('#myModal').addClass("show");
+		if (allOrders.length===0) {
+			$('#warning').addClass("show");
+		} else {
+			renderCart(allOrders);
+			$('#myModal').addClass("show");
+		}
+
 	}
 
 	$('#checkout').on("click", checkout);

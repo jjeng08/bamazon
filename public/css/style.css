@@ -11,6 +11,10 @@ html, body{
 	width:100%;
 }
 
+button{
+	border-radius:5px;
+}
+
 #top {
 	display:flex;
 	position:fixed;
@@ -25,14 +29,16 @@ html, body{
 	justify-content: space-between;
 	width:100%;
 	height:50px;
-	background: white;
+	background: red;
+	padding-top:10px;
+	padding-bottom:10px;
 	border-bottom-width:3px;
 	border-style:solid;
 	border-color: black;
 }
 
 #logo{
-	font-size:40px;
+	font-size:48px;
 	font-family:"bam";
 	margin-left:7.5%;
 }
@@ -40,12 +46,12 @@ html, body{
 #tagline{
 	font-size:24px;
 	font-family:"bam";
+	margin-right:10%;
 }
 
 #submitOrders{
 	font-family:"Bam";
-	font-size:16px;
-	height:20px;
+	font-size:24px;
 	margin-right:5%
 }
 
@@ -57,14 +63,16 @@ html, body{
 	justify-content: center;
 	border-style:solid;
 	border-color: black;
-	padding-top:60px;
-	background-color:white;
+	padding-top:80px;
+	background-color:yellow;
 }
 
 #topBar{
 	display:flex;
 	width:700px;
 	margin-bottom:5px;
+	padding-top:10px;
+	padding-bottom:10px;
 }
 
 #itemContainer{
@@ -72,7 +80,17 @@ html, body{
 	flex-direction:column;
 	width:100%;
 	align-items: center;
-	padding-top:100px;
+	padding-top:140px;
+}
+
+#warning{
+	z-index:12;
+	display:none;
+	text-align:center;
+	width:100%;
+	padding:30px;
+	font-family:"Bam";
+	font-size:24px;
 }
 
 #itemList{
@@ -82,14 +100,14 @@ html, body{
 	width:700px;
 }
 
-#buy {
+.buy {
 	font-family:"Bam";
 	font-size:20px;
 	width:50px;
 	margin-left:25px;
 	text-align:center;
 }
-.addCartButton {
+.addCartButton, .removeFromCart {
 	font-family:"bam";
 	width:50px;
 	margin-left:25px;
@@ -122,7 +140,7 @@ html, body{
 	width:700px;
 }
 
-#product, #source{
+.product, .source{
 	width:100px;
 	margin-left:25px;
 	text-align:center;
@@ -136,7 +154,7 @@ html, body{
 	text-align:center;
 } 
 
-#price, #stock, #order{
+.price, .stock, .order, .count, .total, #grandTotal{
 	width:75px;
 	margin-left:25px;
 	text-align:center;
@@ -144,7 +162,7 @@ html, body{
 	font-size:20px;
 }
 
-.priceBox, .stockBox{
+.priceBox, .stockBox, .countBox, .priceBox, .totalBox{
 	width:75px;
 	margin-left:25px;
 	text-align:center;
@@ -169,8 +187,8 @@ html, body{
 .modal {
 	display: none; /* Hidden by default */
 	position: fixed; /* Stay in place */
-	z-index: 1; /* Sit on top */
-	padding-top:10px;
+	z-index: 4; /* Sit on top */
+	padding-top:30px;
 	left: 0;
 	top: 0;
 	width: 100%; /* Full width */
@@ -186,7 +204,7 @@ html, body{
 #modalContent {
 	display:flex;
 	flex-direction:column;
-	justify-content:center;
+	align-items:center;
 	background-color: #fefefe;
 	margin:auto;
 	border-width:2px;
@@ -194,6 +212,7 @@ html, body{
 	border-color: rgb(41, 53, 53);
 	border-radius: 20px;
 	width: 80%;
+	padding-bottom:30px;
 }
 
 .close {
@@ -208,4 +227,80 @@ html, body{
 	color: black;
 	text-decoration: none;
 	cursor: pointer;
+}
+
+#cartLine{
+	font-family:"Bam";
+	font-size:24px;
+	text-align:center;
+	width:100%;
+	border-top-left-radius: 20px;
+	border-top-right-radius:20px;
+	padding-top:10px;
+	padding-bottom:10px;
+	border-bottom-style:solid;
+	border-color:black;
+	border-width:3px;
+}
+
+#cartHeaders{
+	display:flex;
+	width:700px;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+.cartItems{
+	display: flex;
+	flex-direction:column;
+	align-items:center;
+	width:100%;
+}
+
+.cartBox{
+	display:flex;
+	padding-bottom:10px;
+	padding-top:10px;
+	margin-bottom:30px;
+	align-items:center;
+	border-style:solid;
+	border-width:2px;
+	border-color: black;
+	border-radius: 10px;
+	width:700px;
+}
+
+#totalLine{
+	display:flex;
+	font-family:"Bam";
+	font-size:24px;
+	width:700px;
+	padding-top:10px;
+	padding-bottom:10px;
+	border-top-style:solid;
+	border-color:black;
+	border-width:3px;
+	margin-bottom:20px;
+}
+
+#totalLabel{
+	width:450px;
+	font-family:"Bam";
+	font-size:20px;
+	text-align:right;
+}
+
+#grandTotal
+
+#buttonRow{
+	display:flex;
+	justify-content: space-around;
+	width:600px;
+	margin-bottom:30px;
+}
+
+.lastButtons{
+	width:60px;
+	font-family:"Bam";
+	font-size:24px;
+	text-align:center;
 }
