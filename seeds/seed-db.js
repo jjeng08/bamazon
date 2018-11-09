@@ -4,8 +4,8 @@ const db = require('../models');
 
 // Syncing our sequelize models 
 // =============================================================
-db.sequelize.sync().then(function () {
-    db.Product.bulkCreate([{
+const items = [
+    {
         productName: 'BANANAS',
         departmentName: 'Banana Republic',
         price: 0.89,
@@ -56,9 +56,16 @@ db.sequelize.sync().then(function () {
         price: 592364,
         stock: 1
     },
-    ]).then(function (data) {
-        console.log('Data successfully added!');
-    }).catch(function (error) {
-        console.log('Error', error)
-    });
+]
+
+db.sequelize.sync({ force: true }).then(function () {
+    db.Product.bulkCreate(items)
+        .then(function (rows) {
+            console.log("\n\nINSERTED\n\n");
+            db.sequelize.close();
+        })
+        .catch(function(err) {
+            console.log("\n\nError:", err);
+            db.sequelize.close();
+        });
 });
