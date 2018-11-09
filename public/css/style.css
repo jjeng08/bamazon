@@ -92,6 +92,7 @@ button{
 	font-family:"Bam";
 	font-size:24px;
 }
+/*Note: couldn't get it to display quite yet. Currently, just sastified with it preventing you from going to an empty cart.*/
 
 #itemList{
 	display:flex;
@@ -304,3 +305,6 @@ button{
 	font-size:24px;
 	text-align:center;
 }
+
+/*MOBILE RESPONSIVE*/
+/*Didn't have time to add any for this homework, but there are plans to implement it.*/
